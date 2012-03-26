@@ -6,7 +6,7 @@
     android:layout_height="fill_parent" >
 	
     <ImageView
-		android:id="@+id/img"
+		android:id="@+id/logo"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 	   	android:layout_gravity="center_vertical"
@@ -29,7 +29,12 @@
 	         android:textStyle="bold"
 	         />
  
-	    <TextView android:id="@+id/nbplace"
+	    <TextView android:id="@+id/parkadresse"
+	         android:layout_width="fill_parent"
+	         android:layout_height="fill_parent"
+	         />
+	    
+	    <TextView android:id="@+id/parktelephone"
 	         android:layout_width="fill_parent"
 	         android:layout_height="fill_parent"
 	         />
