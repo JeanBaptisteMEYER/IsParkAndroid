@@ -23,6 +23,7 @@
         <activity android:name=".MapViewActivity" ></activity>
         <activity android:name=".ListParkActivity" ></activity>
         <activity android:name=".HistoActivity" ></activity>
+        <activity android:name=".ReservationActivity" ></activity>
     </application>
 	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>

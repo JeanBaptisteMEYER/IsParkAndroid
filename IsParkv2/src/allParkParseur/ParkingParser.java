@@ -1,4 +1,4 @@
-package parseurXML;
+package allParkParseur;
 
 
 import java.util.ArrayList;

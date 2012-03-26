@@ -1,4 +1,4 @@
-package parseurXML;
+package allParkParseur;
 
 public class Parking {
 	private String id;
