@@ -1,4 +1,4 @@
-package allParkParseur;
+package InfoParkParseur;
 
 
 import java.util.ArrayList;

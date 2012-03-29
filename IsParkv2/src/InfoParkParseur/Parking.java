@@ -1,4 +1,4 @@
-package allParkParseur;
+package InfoParkParseur;
 
 public class Parking {
 	private String id;

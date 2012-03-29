@@ -6,7 +6,7 @@ import com.meyer.IsParkv2.R;
 import com.meyer.IsParkv2.R.id;
 import com.meyer.IsParkv2.R.layout;
 
-import allParkParseur.Parking;
+import InfoParkParseur.Parking;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

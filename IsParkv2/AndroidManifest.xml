@@ -22,8 +22,11 @@
         </activity>
         <activity android:name=".MapViewActivity" ></activity>
         <activity android:name=".ListParkActivity" ></activity>
-        <activity android:name=".HistoActivity" ></activity>
-        <activity android:name=".ReservationActivity" ></activity>
+        <activity android:name=".HistoActivity"></activity>
+        <activity android:name=".ReservationActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".FinReservationActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
     </application>
 	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>

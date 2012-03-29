@@ -5,9 +5,52 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tvResa"
+        android:id="@+id/titre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:text="Votre Parking :"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/parknom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom : " />
+
+    <TextView
+        android:id="@+id/parkadresse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adresse : " />
+
+    <TextView
+        android:id="@+id/parktelephone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telephone : " />
+
+    <TextView
+        android:id="@+id/parknbplace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de places disponibles : " />
+
+    <TextView
+        android:id="@+id/tvHeure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrivée dans"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/bReserver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resever" />
 
 </LinearLayout>

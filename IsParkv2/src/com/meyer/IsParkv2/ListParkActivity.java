@@ -10,9 +10,9 @@ import com.meyer.IsParkv2.R;
 import com.meyer.IsParkv2.R.id;
 import com.meyer.IsParkv2.R.layout;
 
+import InfoParkParseur.InfoPlaceControleur;
+import InfoParkParseur.Parking;
 import Model.ParkAdapter;
-import allParkParseur.Controleur;
-import allParkParseur.Parking;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -30,7 +30,7 @@ public class ListParkActivity extends Activity{
 	
 	private ListView mList;
 	private List<Parking> listParking;
-	private Controleur ct;
+	private InfoPlaceControleur ct;
 	Handler syncHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -49,7 +49,7 @@ public class ListParkActivity extends Activity{
         System.out.println("hello");
         
         //parsing
-        ct = new Controleur(syncHandler);
+        ct = new InfoPlaceControleur(syncHandler,"http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionPark.php?Action=all");
         Thread thread = new Thread(ct.parseData,"ParseBackground");
         thread.start();
     }
@@ -66,7 +66,10 @@ public class ListParkActivity extends Activity{
 			@Override
          	public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Intent intent = new Intent(ListParkActivity.this,ReservationActivity.class);
-				intent.putExtra("id", position);
+				intent.putExtra("idPark", String.valueOf(position+1));
+				intent.putExtra("nom", listParking.get(position).getNom());
+				intent.putExtra("adresse", listParking.get(position).getAdresse());
+				intent.putExtra("telephone", listParking.get(position).getTelephone());
 				startActivity(intent);
         	}
          });

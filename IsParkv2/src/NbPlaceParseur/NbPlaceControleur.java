@@ -1,4 +1,4 @@
-package allParkParseur;
+package NbPlaceParseur;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,12 +23,14 @@ import android.os.Handler;
 import android.os.Message;
 
 
-public class Controleur {
-	private List<Parking> listParking = null;
+public class NbPlaceControleur {
+	private int nbPlace;
 	private Handler syncHandler = new Handler();
+	private String urlString;
 	
-	public Controleur(Handler syncHandler){
+	public NbPlaceControleur(Handler syncHandler, String idPark){
 		this.syncHandler=syncHandler;
+		this.urlString = "http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionParking.php?Action=infoplace&id=" + idPark;
 	}
 
 	public Runnable parseData = new Runnable(){
@@ -48,7 +50,7 @@ public class Controleur {
 			// On défini l'url du fichier XML
 			URL url = null;
 			try {
-				url = new URL("http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionPark.php?Action=all");
+				url = new URL(urlString);
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			}
@@ -56,17 +58,16 @@ public class Controleur {
 			 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
 			 * des opérations de parsing. On vera cette classe en détails ci après.
 			*/
-			ParkingParser handler = new ParkingParser();
+			NbPlaceParser handler = new NbPlaceParser();
 			try {
 				// On parse le fichier XML
-				String uri = "http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionPark.php?Action=all";
-				System.out.println(uri);
+				System.out.println(urlString);
 				
 				InputStream in = url.openStream();
 				System.out.println(in);
 				parseur.parse(in, handler);
 				// On récupère directement la liste des feeds
-				listParking = handler.getParkingList();
+				nbPlace = Integer.parseInt(handler.getNbPlace());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (SAXException e) {
@@ -79,8 +80,8 @@ public class Controleur {
 		
 	};
 	
-	public List<Parking> getData(){
+	public int getData(){
 		// On la retourne l'array list
-		return this.listParking;
+		return this.nbPlace;
 	}
 }
