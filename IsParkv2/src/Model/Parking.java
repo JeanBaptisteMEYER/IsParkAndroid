@@ -1,6 +1,6 @@
-package InfoParkParseur;
+package Model;
 
-public class Parking {
+public class Parking{
 	private String id;
 	private String nom;
 	private String telephone;

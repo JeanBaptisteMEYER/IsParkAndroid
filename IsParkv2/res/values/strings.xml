@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, IsParkv2Activity!</string>
-    <string name="app_name">IsParkv2</string>
+    <string name="app_name">IsPark</string>
     <string name="mapKey">0OzEcQGzG55SlykzOzEgMAS1mCzX8VdSq7B1L0A</string>
 
 </resources>

@@ -1,7 +1,10 @@
-package ReservationParseur;
+package Model;
 
-public class Reservation {
+import java.io.Serializable;
+
+public class Reservation implements Serializable{
 	private String idReservation;
+	private String idParking;
 	private String dateDebut;
 	private String code;
 	private String Prix;
@@ -10,15 +13,25 @@ public class Reservation {
 	
 	public Reservation(){};
 	
-	public Reservation(String idReservation, String dateDebut, String code,
-			String prix, String temps, String qRCode) {
+	public Reservation(String idReservation, String idParking,
+			String dateDebut, String code, String prix, String temps,
+			String qRCode) {
 		super();
 		this.idReservation = idReservation;
+		this.idParking = idParking;
 		this.dateDebut = dateDebut;
 		this.code = code;
 		Prix = prix;
 		this.temps = temps;
 		this.qRCode = qRCode;
+	}
+	
+	public String getIdParking() {
+		return idParking;
+	}
+
+	public void setIdParking(String idParking) {
+		this.idParking = idParking;
 	}
 
 	public String getIdReservation() {
@@ -71,8 +84,10 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [idReservation=" + idReservation + ", dateDebut="
-				+ dateDebut + ", code=" + code + ", Prix=" + Prix + ", temps="
-				+ temps + ", qRCode=" + qRCode + "]";
+		return "Reservation [idReservation=" + idReservation + ", idParking="
+				+ idParking + ", dateDebut=" + dateDebut + ", code=" + code
+				+ ", Prix=" + Prix + ", temps=" + temps + ", qRCode=" + qRCode
+				+ "]";
 	}
+	
 }

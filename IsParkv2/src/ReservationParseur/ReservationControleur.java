@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -19,6 +20,9 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import Model.QRCodeDownload;
+import Model.Reservation;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 
@@ -27,6 +31,7 @@ public class ReservationControleur {
 	private Handler syncHandler = new Handler();
 	private String urlString;
 	private Reservation reservation;
+	private QRCodeDownload qrCodeDown;
 	
 	public ReservationControleur(Handler syncHandler, String idParking, String temps, String datedebut, String idUser){
 		this.syncHandler=syncHandler;
@@ -69,16 +74,16 @@ public class ReservationControleur {
 				parseur.parse(in, handler);
 				// On récupère directement la liste des feeds
 				reservation = handler.getReservation();
+				System.out.println("Control get reservation");
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
+			
 			Message msg = syncHandler.obtainMessage();
 			syncHandler.sendMessage(msg);
 		}
-		
 	};
 	
 	public Reservation getReservation(){

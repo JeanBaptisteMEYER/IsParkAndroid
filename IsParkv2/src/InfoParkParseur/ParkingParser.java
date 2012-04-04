@@ -8,6 +8,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import Model.Parking;
+
 public class ParkingParser extends DefaultHandler {
 	
 	private static final String REPONSE = "Reponse";
