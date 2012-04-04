@@ -3,6 +3,7 @@ package com.meyer.IsParkv2;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.meyer.IsParkv2.R;
 import com.meyer.IsParkv2.R.anim;
@@ -33,7 +34,8 @@ public class ReservationActivity extends Activity {
 	private String idPark;
 	private String idUser = "1";
 	private String url;
-	private TimePicker tp;;
+	private TimePicker tp;
+	private String whichGroup;
 	
 	private Handler nbPlaceHandler = new Handler(){
 		@Override
@@ -70,6 +72,8 @@ public class ReservationActivity extends Activity {
 		tvNom.setText(thisIntent.getExtras().getString("nom"));
 		tvTelephone.setText(thisIntent.getExtras().getString("adresse"));
 		tvAdresse.setText(thisIntent.getExtras().getString("telephone"));
+		
+		whichGroup = thisIntent.getExtras().getString("whichGroup");
 		
 		/***********************************************/
         
@@ -119,8 +123,17 @@ public class ReservationActivity extends Activity {
 	    intent.putExtra("datedebut", date);
 	    intent.putExtra("idUser", this.idUser);
 	    
-	    ReservationGroup parentActivity = (ReservationGroup)getParent();
-	    parentActivity.goNextActivity(intent);
+	    if (whichGroup=="inReservationGroup") {
+	    	ReservationGroup parentActivity = (ReservationGroup)getParent();
+		    parentActivity.goNextActivity(intent);
+		}
+	    
+	    if (whichGroup=="inMapGroup") {
+	    	MapGroup parentActivity = (MapGroup) getParent();
+		    parentActivity.goNextActivity(intent);
+		}
+	    
+	    
 	    
 	}
 	

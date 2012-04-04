@@ -75,6 +75,7 @@ public class ListParkActivity extends Activity{
 				intent.putExtra("nom", listParking.get(position).getNom());
 				intent.putExtra("adresse", listParking.get(position).getAdresse());
 				intent.putExtra("telephone", listParking.get(position).getTelephone());
+				intent.putExtra("whichGroup", "inReservationGroup");
 				
 				//startActivity(intent);
 				ReservationGroup parentActivity = (ReservationGroup)getParent();

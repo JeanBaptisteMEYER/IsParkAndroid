@@ -26,11 +26,11 @@ public class IsParkv2Activity extends TabActivity {
 	    
 	    //tab map
 	    // Create an Intent to launch an Activity for the tab (to be reused)
-	    intent = new Intent().setClass(this, MapViewActivity.class);
+	    intent = new Intent().setClass(this, MapGroup.class);
 	    // Initialize a TabSpec for each tab and add it to the TabHost
 	    spec = tabHost.newTabSpec("map").setIndicator("Trouver un Parking").setContent(intent);
 	    tabHost.addTab(spec);
-	    
+	    // new comment
 	    //tab d'acceil
 	    //afficher ici la liste des parking
 	    System.out.println("Start IsPark");
