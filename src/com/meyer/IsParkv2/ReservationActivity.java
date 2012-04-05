@@ -25,10 +25,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-public class ReservationActivity extends Activity {
+public class ReservationActivity extends Activity implements OnSeekBarChangeListener{
 	private InfoPlaceControleur infoPlaceControl;
 	private NbPlaceControleur nbPlaceControl;
 	private SeekBarAction seekBarAction;
@@ -43,7 +44,7 @@ public class ReservationActivity extends Activity {
 	private String whichGroup;
 	private TextView hour;
 	
-	private Handler nbPlaceHandler = new Handler(){
+	/*private Handler nbPlaceHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
 			nbPlaceDispo=nbPlaceControl.getData();
@@ -52,14 +53,7 @@ public class ReservationActivity extends Activity {
 			TextView tvNbPlace = (TextView) findViewById(R.id.parknbplace);
 			tvNbPlace.setText("Nombre de places disponibles : " + String.valueOf(nbPlaceDispo));
 		}
-	};
-	
-	private Handler seekBarHandler = new Handler(){
-		@Override
-		public void handleMessage(Message msg) {
-			System.out.println("Fin Seek Bar");
-		}
-	};
+	};*/
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +74,7 @@ public class ReservationActivity extends Activity {
 		TextView tvNom = (TextView) findViewById(R.id.parknom);
 		TextView tvTelephone = (TextView) findViewById(R.id.parktelephone);
 		TextView tvAdresse = (TextView) findViewById(R.id.parkadresse);
-		tp = (TimePicker) findViewById(R.id.timePicker);
+		//tp = (TimePicker) findViewById(R.id.timePicker);
 		
 		nomParking = thisIntent.getExtras().getString("nom");
 		System.out.println("ReservA = GetExtra Nom du Parking :" + nomParking);
@@ -93,19 +87,17 @@ public class ReservationActivity extends Activity {
 		
 		//capture de l'heure
 		hourSeekPicker = (SeekBar) findViewById(R.id.hourBarPiker);
+		hourSeekPicker.setProgress(1);
+		hourSeekPicker.setOnSeekBarChangeListener(this);
 		hour = (TextView) findViewById(R.id.hour);
 		
-		/*seekBarAction = new SeekBarAction(hourSeekPicker,hour,seekBarHandler);
-	    Thread seekBarActionTh = new Thread(seekBarAction.ouhouSeekBar,"SeekBarBackground");
-	    seekBarActionTh.start();*/
-		
 		/***********************************************/
-        
+        /*
         //parsing du nombre de place dispo
   		//parsing
         nbPlaceControl = new NbPlaceControleur(nbPlaceHandler, idPark);
 	    Thread nbPlaceTh = new Thread(nbPlaceControl.parseData,"ParseBackground");
-	    nbPlaceTh.start();
+	    nbPlaceTh.start();*/
 	    /***********************************************/
         
 	    //On crée le Listener sur le Bouton
@@ -159,5 +151,24 @@ public class ReservationActivity extends Activity {
 	    	MapGroup parentActivity = (MapGroup) getParent();
 		    parentActivity.goNextActivity(intent);
 		}
+	}
+
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+		// TODO Auto-generated method stub
+		hour.setText("Heure d'arrivée prevue dans " + progress + "h");
+		System.out.println("Seekbar change" + progress);
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -2,70 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/titre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Votre Parking :"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    android:orientation="vertical"
+    android:gravity="center_horizontal" >
 
     <TextView
         android:id="@+id/parknom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nom : "
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingBottom="5dp" />
 
     <TextView
         android:id="@+id/parkadresse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adresse : " />
+        android:text="Adresse : "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/parktelephone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Telephone : " />
-
-    <TextView
-        android:id="@+id/parknbplace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre de places disponibles : "
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <TextView
-        android:id="@+id/tvHeure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Arrivée dans"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <SeekBar
-        android:id="@+id/hourBarPiker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max = "5"/>
+        android:text="Telephone : "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Heure"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Heure d'arrivée prevue dans 1h"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingTop="20dp" />
+    
+    <SeekBar
+        android:id="@+id/hourBarPiker"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:max = "5"
+        android:padding="5dp" />
+    
+    <TextView
+        android:id="@+id/tvHeure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Faite glisser la bar pour definir votre heure"
+        android:paddingBottom="20dp" />
 
     <Button
         android:id="@+id/bReserver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resever" />
+        android:text="Reserver"
+        android:padding="20dp" />
 
 </LinearLayout>

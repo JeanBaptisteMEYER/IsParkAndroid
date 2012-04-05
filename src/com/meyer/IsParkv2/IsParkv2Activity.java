@@ -30,20 +30,18 @@ public class IsParkv2Activity extends TabActivity {
 	    // Initialize a TabSpec for each tab and add it to the TabHost
 	    spec = tabHost.newTabSpec("map").setIndicator("Trouver un Parking").setContent(intent);
 	    tabHost.addTab(spec);
-	    // new comment
+	    
+	    //Tab Liste de reservation
+	    intent = new Intent().setClass(this, HistoriqueGroup.class);
+	    spec = tabHost.newTabSpec("historique").setIndicator("Places réservées").setContent(intent);
+	    tabHost.addTab(spec);
+	    
 	    //tab d'acceil
 	    //afficher ici la liste des parking
 	    System.out.println("Start IsPark");
 	    intent = new Intent(this, ReservationGroup.class);
-	    spec = tabHost.newTabSpec("reservation").setIndicator("Reservez une place").setContent(intent);
+	    spec = tabHost.newTabSpec("reservation").setIndicator("Liste des parkings").setContent(intent);
 	    tabHost.addTab(spec);
-	    
-	    //Tab Liste de reservation
-	    intent = new Intent().setClass(this, HistoriqueGroup.class);
-	    spec = tabHost.newTabSpec("historique").setIndicator("Historique de vos réservations").setContent(intent);
-	    tabHost.addTab(spec);
-	    
-	    
 	    
 	    tabHost.setCurrentTab(0);
 	}

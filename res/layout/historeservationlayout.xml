@@ -3,20 +3,21 @@
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:gravity="center_horizontal" >
 
         <TextView
             android:id="@+id/resumeReservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resume de la reservation"
+            android:text="Résumé de la réservation"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/heureArrivee"
+            android:id="@+id/idReservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrivée prévue pour " />
+            android:text="Id de la réservation" />
 
 
         <TextView
@@ -29,12 +30,13 @@
             android:id="@+id/code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Code de la reservation : " />
+            android:text="Code de la reservation : "/>
 
         <ImageView
             android:id="@+id/qRCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:padding="20px"
+            android:layout_width="500dp"
+            android:layout_height="500dp"/>
 
         <Button
             android:id="@+id/bRetour"

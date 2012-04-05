@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class HistoReservationActivity extends Activity {
-	private TextView tvHeureArrivee;
+	private TextView tvIdReservation;
 	private TextView tvPrix;
 	private TextView tvCode;
 	private Button bRetour;
@@ -45,7 +45,7 @@ public class HistoReservationActivity extends Activity {
 		setContentView(R.layout.historeservationlayout);
 		
 		ivQRCode = (ImageView) findViewById(R.id.qRCode);
-		tvHeureArrivee = (TextView) findViewById(R.id.heureArrivee);
+		tvIdReservation = (TextView) findViewById(R.id.idReservation);
 		tvPrix = (TextView) findViewById(R.id.prix);
 		tvCode = (TextView) findViewById(R.id.code);
 		bRetour = (Button) findViewById(R.id.bRetour);
@@ -60,7 +60,7 @@ public class HistoReservationActivity extends Activity {
 		code = thisIntent.getExtras().getString("Code");
 		qRCode = thisIntent.getExtras().getString("QRCode");
 		
-		tvHeureArrivee.setText("Arrivée prévue pour " + heureArrivee);
+		tvIdReservation.setText("Id de la réservation : " + idReservation);
 		tvPrix.setText("Prix : " + prix  + "€");
 		tvCode.setText("Code de la reservation : " + code);
 		
