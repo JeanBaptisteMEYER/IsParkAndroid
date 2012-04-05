@@ -15,7 +15,8 @@
         android:id="@+id/parknom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nom : " />
+        android:text="Nom : "
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <TextView
         android:id="@+id/parkadresse"
@@ -33,7 +34,8 @@
         android:id="@+id/parknbplace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre de places disponibles : " />
+        android:text="Nombre de places disponibles : "
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
         android:id="@+id/tvHeure"
@@ -45,7 +47,20 @@
     <TimePicker
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
+
+    <SeekBar
+        android:id="@+id/hourBarPiker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max = "5"/>
+
+    <TextView
+        android:id="@+id/hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heure"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/bReserver"

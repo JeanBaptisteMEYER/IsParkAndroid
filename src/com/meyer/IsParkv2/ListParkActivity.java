@@ -14,16 +14,20 @@ import InfoParkParseur.InfoPlaceControleur;
 import Model.ParkAdapter;
 import Model.Parking;
 import android.app.Activity;
+import android.app.ActivityGroup;
 import android.app.AlertDialog;
+import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TabHost;
 
 
 public class ListParkActivity extends Activity{
@@ -42,12 +46,11 @@ public class ListParkActivity extends Activity{
 			setListView();
 		}
 	};
-		
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listviewpark);
-        System.out.println("hello");
+        setContentView(R.layout.lvpark);
         
         //parsing
         ct = new InfoPlaceControleur(syncHandler,"http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionPark.php?Action=all");
@@ -66,24 +69,18 @@ public class ListParkActivity extends Activity{
         mList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
          	public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-				Intent intent = new Intent(ListParkActivity.this,ReservationActivity.class);
-				
-				/*
-				parking.setId(String.valueOf(position+1));
-				parking.setNom(listParking.get(position).getNom());
-				parking.setAdresse(listParking.get(position).getAdresse());
-				parking.setTelephone(listParking.get(position).getTelephone());
-				*/
-				
+				Intent intent = new Intent(v.getContext(),ReservationActivity.class);
 				
 				intent.putExtra("idPark", String.valueOf(position+1));
 				intent.putExtra("nom", listParking.get(position).getNom());
 				intent.putExtra("adresse", listParking.get(position).getAdresse());
 				intent.putExtra("telephone", listParking.get(position).getTelephone());
+				intent.putExtra("whichGroup", "inReservationGroup");
 				
-				
-				startActivity(intent);
-        	}
+				//startActivity(intent);
+				ReservationGroup parentActivity = (ReservationGroup)getParent();
+			    parentActivity.goNextActivity(intent);
+			}
          });
 	}
 }

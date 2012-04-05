@@ -1,35 +1,47 @@
 package Model;
 
-import android.graphics.Bitmap;
+import java.io.Serializable;
 
-public class Reservation {
+public class Reservation implements Serializable{
 	private String idReservation;
+	private String idParking;
+	private String nomParking;
 	private String dateDebut;
 	private String code;
 	private String Prix;
 	private String temps;
 	private String qRCode;
-	private Bitmap qRCodeBmp;
 	
 	public Reservation(){};
 	
-	public Reservation(String idReservation, String dateDebut, String code,
-			String prix, String temps, String qRCode) {
+	public Reservation(String idReservation, String idParking,
+			String dateDebut, String code, String prix, String temps,
+			String qRCode) {
 		super();
 		this.idReservation = idReservation;
+		this.idParking = idParking;
 		this.dateDebut = dateDebut;
 		this.code = code;
 		Prix = prix;
 		this.temps = temps;
 		this.qRCode = qRCode;
+		this.nomParking = null;
+	}
+	
+	public String getIdParking() {
+		return idParking;
 	}
 
-	public Bitmap getqRCodeBmp() {
-		return qRCodeBmp;
+	public void setIdParking(String idParking) {
+		this.idParking = idParking;
+	}
+	
+	public String getNomParking() {
+		return this.nomParking;
 	}
 
-	public void setqRCodeBmp(Bitmap qRCodeBmp) {
-		this.qRCodeBmp = qRCodeBmp;
+	public void setNomParking(String nomParking) {
+		this.nomParking = nomParking;
 	}
 
 	public String getIdReservation() {
@@ -82,10 +94,10 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [idReservation=" + idReservation + ", dateDebut="
+		return "Reservation [idReservation=" + idReservation + ", idParking="
+				+ idParking + ", nomParking=" + nomParking + ", dateDebut="
 				+ dateDebut + ", code=" + code + ", Prix=" + Prix + ", temps="
-				+ temps + ", qRCode=" + qRCode + ", qRCodeBmp=" + qRCodeBmp
-				+ "]";
+				+ temps + ", qRCode=" + qRCode + "]";
 	}
 	
 }

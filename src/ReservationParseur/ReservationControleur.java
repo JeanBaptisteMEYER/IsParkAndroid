@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -21,6 +22,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import Model.QRCodeDownload;
 import Model.Reservation;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 
@@ -30,11 +32,13 @@ public class ReservationControleur {
 	private String urlString;
 	private Reservation reservation;
 	private QRCodeDownload qrCodeDown;
+	private String nomParking;
 	
-	public ReservationControleur(Handler syncHandler, String idParking, String temps, String datedebut, String idUser){
+	public ReservationControleur(Handler syncHandler, String idParking, String nomParking, String temps, String datedebut, String idUser){
 		this.syncHandler=syncHandler;
 		this.reservation = new Reservation();
 		this.urlString = "http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionReservation.php?Action=faire&idParking="+ idParking +"&temps=" + temps + "&datedebut=" + datedebut + "&idUtilisateur=" + idUser;
+		this.nomParking = nomParking;
 	}
 
 	public Runnable parseReservation = new Runnable(){
@@ -72,19 +76,16 @@ public class ReservationControleur {
 				parseur.parse(in, handler);
 				// On récupère directement la liste des feeds
 				reservation = handler.getReservation();
+				reservation.setNomParking(nomParking);
+				System.out.println("Control get reservation");
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 				
-				//down qrcode
-				qrCodeDown.getQRCode();
-			
-				Message msg = syncHandler.obtainMessage();
-				syncHandler.sendMessage(msg);
 			}
 			
+			Message msg = syncHandler.obtainMessage();
+			syncHandler.sendMessage(msg);
 		}
 	};
 	

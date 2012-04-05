@@ -14,6 +14,7 @@ public class ReservationParser extends DefaultHandler {
 	
 	private static final String REPONSE = "Reponse";
 	private final String IDRESERVATION;
+	private final String IDPARKING;
 	private final String DATEDEBUT;
 	private final String CODE;
 	private final String PRIX;
@@ -38,6 +39,7 @@ public class ReservationParser extends DefaultHandler {
 		CODE = "code";
 		PRIX = "prix";
 		QRCODE = "temps";
+		IDPARKING = "idParking";
 	}
 	
 	
@@ -104,6 +106,16 @@ public class ReservationParser extends DefaultHandler {
 				buffer = null;
 			}
 		}
+		
+		if (name.equalsIgnoreCase(IDPARKING)){
+			if(inItem){
+				// Les caractères sont dans l'objet buffer
+				System.out.println ("Got a parking id!");
+				this.reservation.setIdParking(buffer.toString());
+				buffer = null;
+			}
+		}
+		
 		if (name.equalsIgnoreCase(QRCODE)){
 			if(inItem){
 				if(inTemps){
@@ -130,6 +142,7 @@ public class ReservationParser extends DefaultHandler {
 	
 	public Reservation getReservation() {
 		// TODO Auto-generated method stub
+		System.out.println("parser return reservation");
 		return this.reservation;
 	}
 

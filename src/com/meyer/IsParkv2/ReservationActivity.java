@@ -1,39 +1,63 @@
 package com.meyer.IsParkv2;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import com.meyer.IsParkv2.R;
+import com.meyer.IsParkv2.R.anim;
+import com.meyer.IsParkv2.R.id;
+import com.meyer.IsParkv2.R.layout;
 
 import InfoParkParseur.InfoPlaceControleur;
 import Model.Parking;
+import Model.SeekBarAction;
 import NbPlaceParseur.NbPlaceControleur;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class ReservationActivity extends Activity {
 	private InfoPlaceControleur infoPlaceControl;
 	private NbPlaceControleur nbPlaceControl;
+	private SeekBarAction seekBarAction;
+	private SeekBar hourSeekPicker;
 	private Parking parking;
 	private int nbPlaceDispo;
+	private String nomParking;
 	private String idPark;
 	private String idUser = "1";
 	private String url;
+	private TimePicker tp;
+	private String whichGroup;
+	private TextView hour;
+	
 	private Handler nbPlaceHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
 			nbPlaceDispo=nbPlaceControl.getData();
 			//setNbPlace();
-			System.out.println("Parsing nb place done");
+			System.out.println("ReservA = Parsing nb place done");
 			TextView tvNbPlace = (TextView) findViewById(R.id.parknbplace);
 			tvNbPlace.setText("Nombre de places disponibles : " + String.valueOf(nbPlaceDispo));
+		}
+	};
+	
+	private Handler seekBarHandler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			System.out.println("Fin Seek Bar");
 		}
 	};
 	
@@ -41,38 +65,41 @@ public class ReservationActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
 		setContentView(R.layout.reservationlayout);
-		System.out.println("onCreate resAct");
+		
+		System.out.println("ReservA = onCreate resAct");
 		
 		//On récupère l’Intent que l’on a reçu
 		Intent thisIntent = getIntent();
 		//On récupère l'extra grâce à son id
 		idPark = thisIntent.getExtras().getString("idPark");
 		
-		System.out.println("GetExtra Parking :" + parking);
+		System.out.println("ReservA = GetExtra Parking :" + parking);
 		
 		TextView tvNom = (TextView) findViewById(R.id.parknom);
 		TextView tvTelephone = (TextView) findViewById(R.id.parktelephone);
 		TextView tvAdresse = (TextView) findViewById(R.id.parkadresse);
+		tp = (TimePicker) findViewById(R.id.timePicker);
 		
-		tvNom.setText(thisIntent.getExtras().getString("nom"));
+		nomParking = thisIntent.getExtras().getString("nom");
+		System.out.println("ReservA = GetExtra Nom du Parking :" + nomParking);
+		
+		tvNom.setText(nomParking);
 		tvTelephone.setText(thisIntent.getExtras().getString("adresse"));
 		tvAdresse.setText(thisIntent.getExtras().getString("telephone"));
 		
-		/***********************************************/
-		//Parsing des info
-		//construction de l'url
-		/*url = new String("http://natanelpartouche.com/API_ISPARK/API_ISPARK_OLD/Action/ActionParking.php?Action=infopark&id=");
-		url = url + String.valueOf(idPark);
+		whichGroup = thisIntent.getExtras().getString("whichGroup");
 		
-		System.out.println(url);
-		//parsing
-        infoPlaceControl = new InfoPlaceControleur(infoParkHandler,url);
-        Thread thread = new Thread(infoPlaceControl.parseData,"ParseBackground");
-        thread.start();*/
-        
-        /***********************************************/
-        /***********************************************/
+		//capture de l'heure
+		hourSeekPicker = (SeekBar) findViewById(R.id.hourBarPiker);
+		hour = (TextView) findViewById(R.id.hour);
+		
+		/*seekBarAction = new SeekBarAction(hourSeekPicker,hour,seekBarHandler);
+	    Thread seekBarActionTh = new Thread(seekBarAction.ouhouSeekBar,"SeekBarBackground");
+	    seekBarActionTh.start();*/
+		
+		/***********************************************/
         
         //parsing du nombre de place dispo
   		//parsing
@@ -86,6 +113,7 @@ public class ReservationActivity extends Activity {
 	    {
 		    @Override
 			public void onClick(View v) {
+		    	System.out.println("ReservA = Button reserver pressed");
 		    	faireReservation();
 			}
 	    };
@@ -97,26 +125,39 @@ public class ReservationActivity extends Activity {
 	
 	public void faireReservation() {
 		//get hour
-		TimePicker tp = (TimePicker) findViewById(R.id.timePicker);
+		System.out.println("start faireReservation");
 		String heure = new String();
-		heure = String.valueOf(tp.getCurrentHour());
-		System.out.println("Heure : " + heure);
+		//heure = String.valueOf(tp.getCurrentHour());
+		heure = String.valueOf(hourSeekPicker.getProgress());
+		System.out.println("ReservA = Heure : " + heure);
 		//make date
-		String date = new String();
+		/*String date = new String();
 		Date dateActuelle = new Date();
-		date = String.valueOf(dateActuelle.getDay()) + "-" + String.valueOf(dateActuelle.getMonth()) + "-" + String.valueOf(dateActuelle.getYear()) + "-" + String.valueOf(dateActuelle.getHours()) + ":" + String.valueOf(dateActuelle.getMinutes());
-		System.out.println("Date : " + date);
-		
-		idPark="8";
+		date = String.valueOf(String.valueOf(dateActuelle.getYear() + 1900) + "-" + String.valueOf(dateActuelle.getMonth()) + "-" + String.valueOf(dateActuelle.getDay()));
+		*/
+		Calendar c = Calendar.getInstance();
+		String date = String.valueOf(c.get(Calendar.YEAR)) + "-" + String.valueOf(c.get(Calendar.MONTH)+1) + "-" + String.valueOf(c.get(Calendar.DATE));
+		System.out.println("ReservA = Date : " + date);
 		
 		// On met en place le passage entre les deux activités sur ce Listener
 	    Intent intent = new Intent(ReservationActivity.this, FinReservationActivity.class);
+	    
 	    //idParking=1&temps=1&datedebut=1&idUtilisateur=1
 	    intent.putExtra("idParking", this.idPark);
 	    intent.putExtra("temps", heure);
 	    intent.putExtra("datedebut", date);
 	    intent.putExtra("idUser", this.idUser);
-	    startActivity(intent);
+	    intent.putExtra("nomParking", this.nomParking);
+	    System.out.println("Nom du parking passé a finReservation : " + this.nomParking);
 	    
+	    if (whichGroup=="inReservationGroup") {
+	    	ReservationGroup parentActivity = (ReservationGroup)getParent();
+		    parentActivity.goNextActivity(intent);
+		}
+	    
+	    if (whichGroup=="inMapGroup") {
+	    	MapGroup parentActivity = (MapGroup) getParent();
+		    parentActivity.goNextActivity(intent);
+		}
 	}
 }

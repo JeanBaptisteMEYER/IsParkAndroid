@@ -7,7 +7,7 @@
     <uses-sdk android:minSdkVersion="13" />
 
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name" >
         <uses-library android:name="com.google.android.maps" />
         <activity
@@ -21,12 +21,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".MapViewActivity" ></activity>
+        <activity android:name=".MapGroup" ></activity>
         <activity android:name=".ListParkActivity" ></activity>
         <activity android:name=".HistoActivity"></activity>
-        <activity android:name=".ReservationActivity"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
-        <activity android:name=".FinReservationActivity"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name=".ReservationGroup" ></activity>
+        <activity android:name=".HistoriqueGroup" ></activity>
+        <activity android:name=".HistoReservationActivity" ></activity>
+        <activity android:name=".ReservationActivity"></activity>
+        <activity android:name=".FinReservationActivity"></activity>
+        
     </application>
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_GPS" />
+	<uses-permission android:name="android.permission.LOCATION" />
 </manifest>
